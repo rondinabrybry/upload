@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Image Upload</h1>
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
+   <h2>Uploaded Images:</h2>
+<?php
+$pdo = new PDO('mysql:host=localhost;dbname=image_upload_db', 'root', '');
+$stmt = $pdo->query("SELECT image_data, image_type FROM images ORDER BY upload_date DESC");
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $imageData = $row['image_data'];
+    $imageType = $row['image_type'];
+
+    // Display the image using the appropriate content type
+    echo '<img src="data:' . $imageType . ';base64,' . base64_encode($imageData) . '" alt="Uploaded Image"><br>';
+}
+?>
+
+</body>
+</html>

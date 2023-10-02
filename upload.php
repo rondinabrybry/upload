@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(2, $imageType);
         $stmt->execute();
     } else {
-        echo 'Error uploading the image.';
+        echo 'Error uploading the imagescscssss.';
     }
 }
 
